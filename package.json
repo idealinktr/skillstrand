@@ -1,0 +1,13 @@
+{
+  "name": "skillstrand",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Skillstrand site and delivery webhook",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "test": "node --test tests/webhook/*.test.mjs"
+  }
+}
