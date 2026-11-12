@@ -5,7 +5,7 @@
   "private": true,
   "description": "Skillstrand site and delivery webhook",
   "engines": {
-    "node": ">=22.0.0"
+    "node": "22.x"
   },
   "scripts": {
     "test": "node --test tests/webhook/*.test.mjs"

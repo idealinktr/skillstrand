@@ -1,12 +1,24 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": null,
-  "buildCommand": null,
-  "installCommand": null,
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/:path((?!api).*)",
-      "destination": "/site/:path*"
+      "src": "api/stripe-webhook.mjs",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "site/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/stripe-webhook",
+      "dest": "/api/stripe-webhook.mjs"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/site/$1"
     }
   ]
 }
