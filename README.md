@@ -2,7 +2,7 @@
 
 Skillstrand is an open-source Swift starter kit for multi-step assistant skills in an iOS app. It targets the system assistant in the iOS 27.3 developer preview (Siri AI, reached through App Intents). The product name and the logo do not use Apple marks.
 
-The open-source package is MIT. A paid template pack is sold separately and is not part of this repository. Checkout is not connected.
+The open-source package is MIT. A paid template pack is sold separately and is not part of this repository. Buyers get access to a private repository after a Stripe checkout.
 
 ## Names
 
@@ -81,7 +81,7 @@ python3 -m http.server 47231 --directory site
 
 ## Template pack
 
-A paid template pack (sold separately, not in this repository) adds three more skills, three Xcode file templates, and a `GenerableEntity` reference that is not compiled. Launch price is $49 until 14 December 2026, then $79, one-time. Checkout is not connected yet, and nothing in this repo takes payment.
+A paid template pack (sold separately, not in this repository) adds three more skills, three Xcode file templates, and a `GenerableEntity` reference that is not compiled. Launch price is $49 until 14 December 2026, then $79, one-time. Checkout is a hosted Stripe Payment Link. `api/stripe-webhook.mjs` listens for `checkout.session.completed` and invites the buyer's GitHub username to the private pack repository with read access. No card data touches this repo or the site.
 
 ## What needs Xcode
 

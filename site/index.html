@@ -84,15 +84,16 @@
           <p class="kicker">Template pack</p>
           <h2>Three more skills, and the Xcode templates.</h2>
           <p>The open-source core stops at the four examples. A paid template pack, sold separately and not included in this repository, adds booking, inbox triage, and album sharing, plus file templates for a tool intent, an indexed entity, and a skill file. That pack is not MIT.</p>
-          <p>Launch price is $49 until 14 December 2026, then $79, one-time. Checkout is not connected yet. There is no payment code in this repo. When a checkout exists, the button below should point at it. Until then it only marks the spot.</p>
+          <p>Launch price is $49 until 14 December 2026, then $79, one-time. Checkout is hosted by Stripe; this site never sees your card.</p>
           <div class="row">
-            <a class="button quiet" href="#checkout">Checkout is not connected</a>
+            <!-- TODO(before merge): replace href with the LIVE Stripe Payment Link URL once the test flow is verified. -->
+            <a class="button" id="buy" href="#checkout">Get the template pack</a>
           </div>
         </div>
         <aside class="panel" id="checkout">
-          <p class="kicker">Where checkout would go</p>
-          <p>Replace this note with the real checkout URL. Do not collect a card here.</p>
-          <p class="meta">Suggested link text, once a person can pay: “Get the template pack”.</p>
+          <p class="kicker">How delivery works</p>
+          <p>At checkout, enter your GitHub username. Right after payment you get an invite to the private <code>idealinktr/skillstrand-pro</code> repository. Accept it within 7 days.</p>
+          <p class="meta">No GitHub account? Create one first; access is granted per GitHub user.</p>
         </aside>
       </div>
     </section>
