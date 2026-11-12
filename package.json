@@ -8,7 +8,6 @@
     "node": "22.x"
   },
   "scripts": {
-    "test": "node --test tests/webhook/*.test.mjs",
-    "vercel-build": "node scripts/vercel-build.mjs"
+    "test": "node --test tests/webhook/*.test.mjs"
   }
 }
