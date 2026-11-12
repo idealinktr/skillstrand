@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skills — Skillstrand</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="index.html"><img src="logo.svg" alt="">Skillstrand</a>
+      <nav>
+        <a href="guide.html">Getting started</a>
+        <a href="skills.html">Skills</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="compatibility.html">Compatibility</a>
+      </nav>
+    </header>
+    <section>
+      <p class="kicker">Tutorials</p>
+      <h1>Walk each skill the way the tests do.</h1>
+      <article class="card">
+        <h2>Capture to task</h2>
+        <ol class="steps">
+          <li>Pass the capture to <code>CaptureToTaskSkill.run</code>. An empty capture fails with <code>emptyInput</code> and the mapped dialog “Needs a value”.</li>
+          <li>A title produces a confirmation, “Create the task…?”, before anything is saved.</li>
+          <li>Declining cancels. Confirming asks the follow-up, “Add a due date?”.</li>
+          <li>Skip finishes with the task and no date. A date finishes with both. A blank date asks again.</li>
+        </ol>
+      </article>
+      <article class="card">
+        <h2>Search and open</h2>
+        <ol class="steps">
+          <li>Search the starter catalog. “kiln” opens Kiln log.</li>
+          <li>“field” returns Field notes and Field guide and waits.</li>
+          <li>A choice outside that pair fails. A choice inside it opens that item.</li>
+        </ol>
+      </article>
+      <article class="card">
+        <h2>Summarize and share</h2>
+        <ol class="steps">
+          <li>With no note, the run asks which note.</li>
+          <li>The summary collapses whitespace and cuts on a word when the body is longer than the limit.</li>
+          <li>The person picks Messages, Mail, or Copy, then confirms the exact summary.</li>
+          <li>Declining shares nothing.</li>
+        </ol>
+      </article>
+      <article class="card">
+        <h2>Scheduled reminder</h2>
+        <ol class="steps">
+          <li>A blank title fails. No concrete times fails with “Nothing matched”.</li>
+          <li>Friday at 9:00 and Friday at 6:00 are offered together.</li>
+          <li>After one is chosen, the run asks to schedule that pair. Only a confirmation calls the tool.</li>
+        </ol>
+      </article>
+    </section>
+    <footer><p><a href="index.html">Skillstrand</a></p></footer>
+  </div>
+</body>
+</html>

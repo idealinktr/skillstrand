@@ -1,0 +1,49 @@
+name: SkillstrandSample
+options:
+  bundleIdPrefix: dev.skillstrand
+  deploymentTarget:
+    iOS: "27.3"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  SWIFT_VERSION: "6.0"
+  SWIFT_STRICT_CONCURRENCY: complete
+  MARKETING_VERSION: "0.1.0"
+  CURRENT_PROJECT_VERSION: "1"
+  DEVELOPMENT_TEAM: ""
+  CODE_SIGN_STYLE: Automatic
+  CODE_SIGNING_ALLOWED: "NO"
+  CODE_SIGNING_REQUIRED: "NO"
+  IPHONEOS_DEPLOYMENT_TARGET: "27.3"
+  TARGETED_DEVICE_FAMILY: "1,2"
+packages:
+  Skillstrand:
+    path: ../..
+targets:
+  SkillstrandSample:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+      - path: Skills.skillsbundle
+        type: folder
+        buildPhase: resources
+    dependencies:
+      - package: Skillstrand
+        product: Skillstrand
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.skillstrand.sample
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Skillstrand
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_NSSiriUsageDescription: Skillstrand registers shortcuts the system assistant can run.
+        SUPPORTS_MACCATALYST: NO
+        SWIFT_EMIT_LOC_STRINGS: YES
+schemes:
+  SkillstrandSample:
+    build:
+      targets:
+        SkillstrandSample: all
+    run:
+      config: Debug

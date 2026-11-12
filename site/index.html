@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skillstrand — skills for the system assistant</title>
+  <meta name="description" content="An open-source Swift starter kit for multi-step assistant skills, app entities, and Spotlight indexing. Pinned to the iOS 27.3 beta.">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="index.html"><img src="logo.svg" alt="">Skillstrand</a>
+      <nav>
+        <a href="guide.html">Getting started</a>
+        <a href="skills.html">Skills</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="compatibility.html">Compatibility</a>
+        <a href="#template-pack">Template pack</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <p class="kicker">Open-source starter kit · MIT</p>
+        <h1>Teach a multi-step skill without inventing the plumbing.</h1>
+        <p class="lede">Skillstrand is a Swift package for iOS apps that need tool intents, entities, Spotlight indexing, and a short guidance file the system assistant can follow. It is built for Siri AI’s developer preview, and it keeps that name out of the product mark.</p>
+        <div class="row">
+          <a class="button" href="guide.html">Read the getting started guide</a>
+          <a class="button quiet" href="skills.html">Four worked skills</a>
+        </div>
+      </div>
+      <aside class="panel">
+        <p class="kicker">Pinned beta</p>
+        <p><strong>iOS 27.3 beta</strong> (24C5037i)<br>Xcode 27.3 beta (27C5020n)</p>
+        <p class="meta">Seeded 3 November 2026. This is the first 27.3 beta. There was no beta 2 on Apple’s releases list as of 9 November 2026.</p>
+      </aside>
+    </section>
+
+    <section>
+      <h2>What you drop into an app</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Tool intents</h3>
+          <p>A parameter builder, dialog copy, and an error map. On device those become <code>AppIntent</code> results, confirmation, and disambiguation.</p>
+        </article>
+        <article class="card">
+          <h3>Entities</h3>
+          <p>Property conventions plus an in-memory stand-in for <code>EntityQuery</code> and <code>EntityStringQuery</code>. The sample adopts <code>IndexedEntity</code>.</p>
+        </article>
+        <article class="card">
+          <h3>Spotlight</h3>
+          <p>A sync coordinator that diffs fingerprints into insert, update, and delete batches, then a bridge onto a named <code>CSSearchableIndex</code>.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Four skills, each with a follow-up</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Capture to task</h3>
+          <p>Read a title, confirm before saving, then ask whether to add a due date.</p>
+        </article>
+        <article class="card">
+          <h3>Search and open</h3>
+          <p>A string query that opens one hit and asks when “field” matches two items.</p>
+        </article>
+        <article class="card">
+          <h3>Summarize and share</h3>
+          <p>Shorten a note, pick Messages, Mail, or Copy, and confirm before anything leaves.</p>
+        </article>
+        <article class="card">
+          <h3>Scheduled reminder</h3>
+          <p>“Friday” is two times. The person picks one, then confirms the reminder.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="template-pack">
+      <div class="grid two">
+        <div>
+          <p class="kicker">Template pack</p>
+          <h2>Three more skills, and the Xcode templates.</h2>
+          <p>The open-source core stops at the four examples. A paid template pack, sold separately and not included in this repository, adds booking, inbox triage, and album sharing, plus file templates for a tool intent, an indexed entity, and a skill file. That pack is not MIT.</p>
+          <p>Launch price is $49 until 14 December 2026, then $79, one-time. Checkout is not connected yet. There is no payment code in this repo. When a checkout exists, the button below should point at it. Until then it only marks the spot.</p>
+          <div class="row">
+            <a class="button quiet" href="#checkout">Checkout is not connected</a>
+          </div>
+        </div>
+        <aside class="panel" id="checkout">
+          <p class="kicker">Where checkout would go</p>
+          <p>Replace this note with the real checkout URL. Do not collect a card here.</p>
+          <p class="meta">Suggested link text, once a person can pay: “Get the template pack”.</p>
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      <p>Skillstrand is not affiliated with Apple. “Siri AI” and “App Intents” appear only as descriptions of the system APIs the package calls. The MIT license covers the package, the sample, and this site. The template pack is reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>

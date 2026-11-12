@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Architecture — Skillstrand</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="index.html"><img src="logo.svg" alt="">Skillstrand</a>
+      <nav>
+        <a href="guide.html">Getting started</a>
+        <a href="skills.html">Skills</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="compatibility.html">Compatibility</a>
+      </nav>
+    </header>
+    <section>
+      <p class="kicker">Architecture</p>
+      <h1>Planners on every platform. System calls behind canImport.</h1>
+      <div class="grid">
+        <article class="card">
+          <h3>SkillstrandCore</h3>
+          <p>The skill-file parser, dialog values, and the step trace a skill returns. No system framework.</p>
+        </article>
+        <article class="card">
+          <h3>SkillstrandIntents</h3>
+          <p>Intent and parameter builders, the error map, and, when App Intents is present, confirmation and disambiguation.</p>
+        </article>
+        <article class="card">
+          <h3>SkillstrandEntities</h3>
+          <p>Property conventions and <code>EntityQueryScaffold</code>. Display representations are mapped only when App Intents is linked.</p>
+        </article>
+        <article class="card">
+          <h3>SkillstrandSpotlight</h3>
+          <p><code>IndexSyncSession</code> remembers fingerprints. <code>EntitySpotlightBridge</code> applies the plan to a named index.</p>
+        </article>
+        <article class="card">
+          <h3>SkillstrandShortcuts</h3>
+          <p>Phrase checks require <code>{applicationName}</code>. <code>AppShortcutsSource</code> renders an <code>AppShortcutsProvider</code>.</p>
+        </article>
+        <article class="card">
+          <h3>SkillstrandExamples</h3>
+          <p>The four skills, their Markdown, and the App Intent types the sample registers.</p>
+        </article>
+      </div>
+      <h2>Why the split</h2>
+      <p>A skill file does not execute. The assistant reads it and calls tools. The package still models the questions those tools have to ask — a missing value, a choice, a confirmation — so you can test the path on Linux before a simulator exists. The same inputs drive the sample’s studio.</p>
+      <p>Indexing follows the same idea. The coordinator is pure. The bridge is the only type that touches <code>CSSearchableIndex</code>. Inserts and updates both go through <code>indexAppEntities</code>, because that call replaces an identifier that is already there. Deletes use <code>deleteAppEntities(identifiedBy:ofType:)</code>.</p>
+    </section>
+    <footer><p><a href="index.html">Skillstrand</a></p></footer>
+  </div>
+</body>
+</html>

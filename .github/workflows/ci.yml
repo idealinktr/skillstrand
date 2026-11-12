@@ -1,0 +1,138 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linux:
+    name: Swift tests on Linux
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: swift-actions/setup-swift@v2
+        with:
+          swift-version: "6.2.1"
+      - name: Test the platform-neutral planners
+        run: swift test
+
+  apple:
+    name: Package tests and sample build
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select the Xcode 27.3 beta when it is installed
+        run: |
+          set -euo pipefail
+          selected=""
+          for app in /Applications/Xcode*.app; do
+            [ -d "$app" ] || continue
+            version="$("$app/Contents/Developer/usr/bin/xcodebuild" -version 2>/dev/null | head -n 1 || true)"
+            echo "$app -> ${version:-unknown}"
+            if printf '%s' "$version" | grep -q "27.3"; then
+              selected="$app"
+              break
+            fi
+          done
+          if [ -n "$selected" ]; then
+            sudo xcode-select -s "$selected/Contents/Developer"
+            echo "SKILLSTRAND_HAS_PINNED_SDK=1" >> "$GITHUB_ENV"
+            echo "Using $selected"
+          else
+            echo "SKILLSTRAND_HAS_PINNED_SDK=0" >> "$GITHUB_ENV"
+            echo "Xcode 27.3 beta is not installed. Package tests still run."
+            echo "The sample build is skipped unless an iOS 27.3 SDK is present."
+          fi
+          xcodebuild -version
+
+      - name: Test the package
+        run: swift test
+
+      - name: Pick an installed simulator
+        id: simulator
+        run: python3 scripts/select-simulator.py
+
+      - name: Generate the sample project
+        working-directory: Examples/SampleApp
+        run: |
+          if ! command -v xcodegen >/dev/null 2>&1; then
+            brew install xcodegen
+          fi
+          xcodegen generate
+
+      - name: Build the sample
+        working-directory: Examples/SampleApp
+        run: |
+          set -euo pipefail
+          destination="${{ steps.simulator.outputs.destination }}"
+
+          # True when $1 >= $2 (dotted numeric versions).
+          ver_ge() {
+            awk -v a="$1" -v b="$2" 'BEGIN {
+              n = split(a, A, ".")
+              m = split(b, B, ".")
+              k = (n > m ? n : m)
+              for (i = 1; i <= k; i++) {
+                x = (i <= n && A[i] != "") ? A[i] + 0 : 0
+                y = (i <= m && B[i] != "") ? B[i] + 0 : 0
+                if (x > y) exit 0
+                if (x < y) exit 1
+              }
+              exit 0
+            }'
+          }
+
+          iphoneos_sdks() {
+            local developer="$1"
+            DEVELOPER_DIR="$developer" "$developer/usr/bin/xcodebuild" -showsdks 2>/dev/null \
+              | sed -n 's/.*-sdk iphoneos\([0-9.][0-9.]*\).*/\1/p' || true
+          }
+
+          best_app=""
+          best_version=""
+          for app in /Applications/Xcode*.app; do
+            [ -d "$app" ] || continue
+            developer="$app/Contents/Developer"
+            version_line="$("$developer/usr/bin/xcodebuild" -version 2>/dev/null | head -n 1 || true)"
+            echo "$app -> ${version_line:-unknown}"
+            version_number="$(printf '%s\n' "$version_line" | sed -n 's/^Xcode \([0-9][0-9.]*\).*/\1/p')"
+            [ -n "$version_number" ] || continue
+            ver_ge "$version_number" "27.3" || continue
+            sdk_ok=0
+            while IFS= read -r sdk; do
+              [ -n "$sdk" ] || continue
+              if ver_ge "$sdk" "27.3"; then
+                sdk_ok=1
+                break
+              fi
+            done < <(iphoneos_sdks "$developer")
+            [ "$sdk_ok" -eq 1 ] || continue
+            if [ -z "$best_version" ] || ver_ge "$version_number" "$best_version"; then
+              best_app="$app"
+              best_version="$version_number"
+            fi
+          done
+
+          if [ -z "$best_app" ]; then
+            current_line="$(xcodebuild -version 2>/dev/null | head -n 1 || true)"
+            current_number="$(printf '%s\n' "$current_line" | sed -n 's/^Xcode \([0-9][0-9.]*\).*/\1/p')"
+            if [ -z "$current_number" ]; then
+              current_number="unknown"
+            fi
+            echo "::notice::Skipping sample-app build: Xcode 27.3+ (iOS 27.3 SDK) not available on this runner (found Xcode ${current_number})"
+            exit 0
+          fi
+
+          sudo xcode-select -s "$best_app/Contents/Developer"
+          echo "Using $best_app (Xcode $best_version) for the sample build"
+          xcodebuild -version
+          xcodebuild -showsdks
+          xcodebuild \
+            -project SkillstrandSample.xcodeproj \
+            -scheme SkillstrandSample \
+            -destination "$destination" \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS='DEBUG SKILLSTRAND_IOS_27_3_SDK' \
+            build

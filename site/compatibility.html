@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compatibility — Skillstrand</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="index.html"><img src="logo.svg" alt="">Skillstrand</a>
+      <nav>
+        <a href="guide.html">Getting started</a>
+        <a href="skills.html">Skills</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="compatibility.html">Compatibility</a>
+      </nav>
+    </header>
+    <section>
+      <p class="kicker">Pinned 9 November 2026</p>
+      <h1>iOS 27.3 beta, first seed.</h1>
+      <table>
+        <thead><tr><th>Piece</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>iOS</td><td>27.3 beta, build 24C5037i, 3 November 2026</td></tr>
+          <tr><td>Xcode</td><td>27.3 beta, build 27C5020n, 3 November 2026</td></tr>
+          <tr><td>Swift</td><td>6 language mode. Release notes: Swift 6.4 in that Xcode beta.</td></tr>
+        </tbody>
+      </table>
+      <p>Build numbers come from <a href="https://developer.apple.com/news/releases/">developer.apple.com/news/releases</a>. The same list has no iOS 27.3 beta 2 as of 9 November 2026. The Xcode notes are at <a href="https://developer.apple.com/documentation/xcode-release-notes/xcode-27_3-release-notes">xcode-27_3-release-notes</a>.</p>
+      <p><code>@AppIntent(.tool)</code> is gated by the compilation flag <code>SKILLSTRAND_IOS_27_3_SDK</code> because a macro cannot be hidden with <code>#available</code>. <code>GenerableEntity</code> is documented as a preview and is not adopted in compiled code. The full note is <code>docs/COMPATIBILITY.md</code>.</p>
+    </section>
+    <footer><p><a href="index.html">Skillstrand</a></p></footer>
+  </div>
+</body>
+</html>
