@@ -2,18 +2,9 @@
 
 Skillstrand is an open-source Swift starter kit for multi-step assistant skills in an iOS app. It targets the system assistant in the iOS 27.3 developer preview (Siri AI, reached through App Intents). The product name and the logo do not use Apple marks.
 
-The open-source package is MIT. A paid template pack is sold separately and is not part of this repository. Buyers get access to a private repository after a Stripe checkout.
+The site is [https://skillstrand.com](https://skillstrand.com).
 
-## Names
-
-**Skillstrand** is the name used here.
-
-Two other original names were clear of well-known Swift packages and products:
-
-- **Shuttlemark.** ShuttleX is a different macOS SSH menu app.
-- **Futtock.** A ship's curved rib. No Swift package or product by that name turned up.
-
-These were set aside because something else already uses them: Lumenstep, Skeinworks, Quillwright, Tidemark (a Swift markdown package), Cordwainer, and Heddle. The Swift package `strand` is a Postgres workflow engine, which is why this one is Skillstrand.
+The open-source package is MIT. The paid [Skillstrand Pro pack](https://skillstrand.com) is sold separately and is not part of this repository. Launch price is $49 until 14 December 2026, then $79, one-time. Buyers enter their GitHub username at checkout and receive an invite to the private `idealinktr/skillstrand-pro` repository with read-only access. The buy button is on the site. The Stripe Payment Link is [https://buy.stripe.com/8x2aEWfKz02hbAveoR18c0m](https://buy.stripe.com/8x2aEWfKz02hbAveoR18c0m).
 
 ## Pin
 
